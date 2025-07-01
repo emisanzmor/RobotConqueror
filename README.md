@@ -1,82 +1,112 @@
 # Conqueror Robot Tank
 
-## Descripción
+## Description
 
-Conqueror Robot Tank es un vehículo autónomo/controlado que tiene diferentes funciones y puede moverse
-a distintas direcciones. Está compuesto por motores de oruga, sensores y un microcontrolador para realizar
-diversas tareas como avanzar, retroceder, girar etc.
+The Conqueror Robot Tank is an autonomous/remote-controlled vehicle with various functionalities and directional movement. It is composed of tracked motors, sensors, and a microcontroller that allow it to perform tasks such as moving forward, backward, turning, and stopping.
 
-## Componentes y hardware
+---
 
-- Chasis: Robot Tank con orugas
-- Microcontrolador : Rasperry Pi 4 / Arduino / ESP32
-- Motores: Motores DC con Driver de control
+## Components & Hardware
 
-  - Sensores:
-    - Sensor Ultrasonico HC - SR04 (utilizado para la detección de objetos).
-    - Sensor infrarrojo (utilizado para el siguimiento de la línea).
+- **Chassis**: Tracked Robot Tank
+- **Microcontroller**: Raspberry Pi 4 / Arduino / ESP32
+- **Motors**: DC motors with motor driver
 
-- Comunicación : Via WiFi / App Elegoo / Control
-- Fuente de energía : Batería recargable (Lipo 11.1 V)
+  - **Sensors**:
+    - Ultrasonic Sensor HC-SR04 (used for obstacle detection)
+    - Infrared Sensor (used for line-following)
 
-## Dependencias
+- **Communication**: Via WiFi / Elegoo App / Remote Control
+- **Power Supply**: Rechargeable battery (Lipo 11.1 V)
 
-Para ejecutar este proyecto, necesitas instalar las siguientes dependencias:
+---
 
-- **pyduinocli**: Para compilar y cargar el código en el Arduino.
-- **pyserial**: Para detectar el puerto serial al que está conectado el Arduino.
+## Dependencies
 
-Puedes instalar estas dependencias usando pip:
+To run this project, install the following Python libraries:
+
+- `pyduinocli`: Used to compile and upload code to the Arduino.
+- `pyserial`: Used to detect the serial port connected to the Arduino.
+
+### Installation
 
 ```bash
 pip install pyduinocli pyserial
 ```
 
+---
+
 ### `RobotController.py`
 
-Este archivo contiene la clase `RobotController`, que maneja los movimientos del robot y la carga del código en el Arduino. También contiene la clase `ArduinoSketchManager`, que se encarga de generar el código de Arduino.
+This file contains the `RobotController` class, which manages robot movement and uploads the code to the Arduino. It also includes the `ArduinoSketchManager` class, which generates the Arduino sketch.
 
-## Métodos de las Clases
+---
 
-### Clase `RobotController`
+## Class Methods
 
-| Método          | Parámetros                | Descripción                                                                  |
-| --------------- | ------------------------- | ---------------------------------------------------------------------------- |
-| `move_forward`  | `duration=3`, `power=128` | Mueve el robot hacia adelante durante un tiempo con una potencia específica. |
-| `move_backward` | `duration=3`, `power=128` | Mueve el robot hacia atrás durante un tiempo con una potencia específica.    |
-| `turn_left`     | `duration=2`, `power=100` | Gira el robot a la izquierda durante un tiempo con una potencia específica.  |
-| `turn_right`    | `duration=2`, `power=100` | Gira el robot a la derecha durante un tiempo con una potencia específica.    |
-| `stop`          | `duration=2`, `power=50`  | Detiene el robot durante un tiempo con una potencia específica.              |
-| `upload_sketch` | Ninguno                   | Compila y carga el código en el Arduino.                                     |
+### `RobotController` Class
 
-- Puedes cambiar los valores de los parámetros de la clase RobotController si así lo deseas.
+| Method           | Parameters               | Description                                                                 |
+|------------------|---------------------------|-----------------------------------------------------------------------------|
+| `move_forward`   | `duration=3`, `power=128` | Moves the robot forward for a set duration and power level.                |
+| `move_backward`  | `duration=3`, `power=128` | Moves the robot backward for a set duration and power level.               |
+| `turn_left`      | `duration=2`, `power=100` | Turns the robot to the left for a set duration and power level.            |
+| `turn_right`     | `duration=2`, `power=100` | Turns the robot to the right for a set duration and power level.           |
+| `stop`           | `duration=2`, `power=50`  | Stops the robot.                                                           |
+| `upload_sketch`  | None                      | Compiles and uploads the sketch to the Arduino.                             |
 
-### Clase `ArduinoSketchManager`
+> You can adjust the method parameters as needed.
 
-| Método            | Parámetros                     | Descripción                                                  |
-| ----------------- | ------------------------------ | ------------------------------------------------------------ |
-| `add_movement`    | `command`, `duration`, `power` | Agrega un bloque de movimiento al código de Arduino.         |
-| `finalize_sketch` | Ninguno                        | Finaliza el código de Arduino agregando la función `loop()`. |
+---
 
-## Instalación
+### `ArduinoSketchManager` Class
 
-1. Clonar el repositorio: `git clone https://github.com/TC1001S-2025/Tank.git`. Este ya incluye las librerias del Conqueror Robot Tank.
+| Method             | Parameters                     | Description                                                 |
+|--------------------|--------------------------------|-------------------------------------------------------------|
+| `add_movement`     | `command`, `duration`, `power` | Adds a movement block to the Arduino sketch.                |
+| `finalize_sketch`  | None                           | Finalizes the sketch by adding the `loop()` function.       |
 
-2. Instalar las dependencias necesarias:
+---
 
-   - pip install pyduinocli
-   - pip install pyserial
+## Installation
 
-## Ejecución
+1. Clone the repository:
 
-1. Conecta tu Arduino al ordenador.
-2. Ejecuta el archivo `demo1.py` para generar el código y cargarlo en el Arduino o puedes generar uno propio.
+```bash
+git clone https://github.com/TC1001S-2025/Tank.git
+```
+
+This repository already includes the necessary libraries for the Conqueror Robot Tank.
+
+2. Install the required dependencies:
+
+```bash
+pip install pyduinocli
+pip install pyserial
+```
+
+---
+
+## Execution
+
+1. Connect your Arduino to the computer.
+2. Run the `demo1.py` script to generate the Arduino code and upload it.
 
 ```bash
 python demo1.py
 ```
 
-## Notas
+You can also create your own script if needed.
 
-- Asegúrate de que el Arduino esté conectado y que el puerto serial esté correctamente configurado.
-- El código generado se guarda en `commands/commands.ino`.
+---
+
+## Notes
+
+- Make sure your Arduino is properly connected and the serial port is correctly set.
+- The generated Arduino code is saved in: `commands/commands.ino`
+
+---
+
+## License
+
+This project is for educational use. Distributed under the academic course's terms of use.
